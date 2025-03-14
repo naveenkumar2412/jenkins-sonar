@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/naveenkumar2412/jenkins-sonar.git'
+                git branch: 'main', url: 'https://github.com/naveenkumar2412/jenkins-sonar.git'
             }
         }
         stage('Build') {
