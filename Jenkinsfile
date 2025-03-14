@@ -1,9 +1,9 @@
 pipeline {
     agent any
     tools {
-        // Correct tool type for SonarQube
-        sonarRunner 'SonarQube_Scanner'  // Ensure the name matches your SonarQube configuration
-        jdk 'JDK11'  // You can either use JDK11 or configure JDK8 if needed
+        // Correct tool type for SonarQube Scanner
+        SonarRunner 'SonarQube_Scanner'  // Ensure the name matches your SonarQube configuration
+        jdk 'JDK11'  // JDK version you have installed
         maven 'Maven3'  // Ensure Maven is configured correctly
     }
     environment {
@@ -46,4 +46,5 @@ pipeline {
         }
     }
 }
+
 
