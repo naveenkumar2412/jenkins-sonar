@@ -1,11 +1,11 @@
 pipeline {
     agent any
     tools {
-        // Specify Maven tool if not already configured
-        maven 'Maven3'
+        // Ensure that you reference the correct SonarQube Scanner name configured in Jenkins
+        sonarQubeScanner 'SonarQube_Scanner'
     }
     environment {
-        SONARQUBE = 'SonarQube'  // Define the SonarQube installation in Jenkins
+        SONARQUBE = 'SonarQube'  // Your SonarQube server name configured in Jenkins
     }
     stages {
         stage('Checkout SCM') {
@@ -22,7 +22,6 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv('SonarQube') {
-                        // Run the SonarQube scanner with required parameters
                         sh '''
                             sonar-scanner \
                             -Dsonar.projectKey=sonar-example \
@@ -45,4 +44,5 @@ pipeline {
         }
     }
 }
+
 
