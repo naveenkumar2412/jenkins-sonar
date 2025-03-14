@@ -10,7 +10,10 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/naveenkumar2412/jenkins-sonar.git'
+                checkout([
+                    $class: 'GitSCM',
+                    git branch: 'main', url: 'https://github.com/naveenkumar2412/jenkins-sonar.git'
+                 ])   
             }
         }
         stage('Build') {
