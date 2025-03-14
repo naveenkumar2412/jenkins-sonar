@@ -26,7 +26,7 @@ pipeline {
                             sonar-scanner \
                             -Dsonar.projectKey=jenkins \
                             -Dsonar.host.url=http://65.2.129.154:9000 \
-                            -Dsonar.login=sqa_f4281bf038ca359d0024b819f54322882ab32ff9
+                            -Dsonar.login=jenkins
                         '''
                     }
                 }
