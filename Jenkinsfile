@@ -1,13 +1,11 @@
 pipeline {
     agent any
     tools {
-        // Correct tool type for SonarQube Scanner
-        SonarRunner 'SonarQube_Scanner'  // Ensure the name matches your SonarQube configuration
         jdk 'JDK11'  // JDK version you have installed
-        maven 'Maven3'  // Ensure Maven is configured correctly
+        maven 'Maven3'  // Maven configuration
     }
     environment {
-        SONARQUBE = 'SonarQube'  // Match the SonarQube server configuration name
+        SONARQUBE = 'SonarQube'  // SonarQube server name as configured in Jenkins
     }
     stages {
         stage('Checkout SCM') {
