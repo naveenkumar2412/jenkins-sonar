@@ -1,8 +1,8 @@
 pipeline {
     agent any
     tools {
-        jdk 'JDK11'  // JDK version you have installed
-        maven 'Maven3'  // Maven configuration
+        jdk 'JDK11'
+        maven 'Maven3'
     }
     environment {
         SONARQUBE = 'SonarQube'  // SonarQube server name as configured in Jenkins
@@ -22,8 +22,11 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv('SonarQube') {
-                        // Running sonar-scanner with the right environment
+                        // Run sonar-scanner using Docker
                         sh '''
+                            docker run --rm \
+                            -v $(pwd):/usr/src \
+                            sonarsource/sonar-scanner-cli:latest \
                             sonar-scanner \
                             -Dsonar.projectKey=jenkins \
                             -Dsonar.host.url=http://13.234.117.178:9000 \
@@ -38,7 +41,6 @@ pipeline {
                 script {
                     // Run Dependency-Check analysis with Maven plugin
                     echo 'Running Dependency-Check analysis...'
-                    // Assuming you have the dependency-check plugin set up
                     sh 'mvn org.owasp:dependency-check-maven:check'
                 }
             }
@@ -50,5 +52,6 @@ pipeline {
         }
     }
 }
+
 
 
