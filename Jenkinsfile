@@ -6,6 +6,7 @@ pipeline {
     }
     environment {
         SONARQUBE = 'SonarQube'  // SonarQube server name as configured in Jenkins
+        SONAR_TOKEN = 'sqa_00223b59a3758b1269eb00c61abfbd454f4cd53b'  // Replace with the token you generated
     }
     stages {
         stage('Checkout SCM') {
@@ -22,7 +23,6 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv('SonarQube') {
-                        // Run sonar-scanner using Docker
                         sh '''
                             docker run --rm \
                             -v $(pwd):/usr/src \
@@ -30,7 +30,7 @@ pipeline {
                             sonar-scanner \
                             -Dsonar.projectKey=jenkins \
                             -Dsonar.host.url=http://13.234.117.178:9000 \
-                            -Dsonar.login=jenkins
+                            -Dsonar.login=$SONAR_TOKEN
                         '''
                     }
                 }
