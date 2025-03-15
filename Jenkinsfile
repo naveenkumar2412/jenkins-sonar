@@ -22,10 +22,11 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv('SonarQube') {
+                        // Running sonar-scanner with the right environment
                         sh '''
                             sonar-scanner \
                             -Dsonar.projectKey=jenkins \
-                            -Dsonar.host.url=http://65.2.129.154:9000 \
+                            -Dsonar.host.url=http://13.234.117.178:9000 \
                             -Dsonar.login=jenkins
                         '''
                     }
@@ -34,7 +35,12 @@ pipeline {
         }
         stage('Dependency-Check Analysis') {
             steps {
-                echo 'Running Dependency-Check analysis...'
+                script {
+                    // Run Dependency-Check analysis with Maven plugin
+                    echo 'Running Dependency-Check analysis...'
+                    // Assuming you have the dependency-check plugin set up
+                    sh 'mvn org.owasp:dependency-check-maven:check'
+                }
             }
         }
     }
